@@ -1,7 +1,8 @@
 package com.geekluxun;
 
 import java.util.concurrent.*;
-import static net.jcip.examples.LaunderThrowable.launderThrowable;
+
+import static com.geekluxun.LaunderThrowable.launderThrowable;
 
 /**
  * TimedRun

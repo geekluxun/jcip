@@ -1,8 +1,9 @@
 package com.geekluxun;
 
 import java.util.concurrent.*;
+
+import static com.geekluxun.LaunderThrowable.launderThrowable;
 import static java.util.concurrent.Executors.newScheduledThreadPool;
-import static net.jcip.examples.LaunderThrowable.launderThrowable;
 
 /**
  * TimedRun2
