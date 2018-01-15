@@ -27,6 +27,7 @@ public class UnsafeCachingFactorizer extends GenericServlet implements Servlet {
             encodeIntoResponse(resp, lastFactors.get());
         else {
             BigInteger[] factors = factor(i);
+            /**尽管两个操作各自是原子操作，但是约束要求两个操作是组合原子操作，所以此处是线程不安全的！！！*/
             lastNumber.set(i);
             lastFactors.set(factors);
             encodeIntoResponse(resp, factors);
