@@ -31,6 +31,7 @@ public abstract class FutureRenderer {
         renderText(source);
 
         try {
+            /** 此处只是创建了一个任务来执行所有的图片下载 请对比Renderer.java实现*/
             List<ImageData> imageData = future.get();
             for (ImageData data : imageData)
                 renderImage(data);

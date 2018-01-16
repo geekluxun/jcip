@@ -28,6 +28,7 @@ public class Memoizer <A, V> implements Computable<A, V> {
                     }
                 };
                 FutureTask<V> ft = new FutureTask<V>(eval);
+                /**避免  put get 组合操作非原子性的问题*/
                 f = cache.putIfAbsent(arg, ft);
                 if (f == null) {
                     f = ft;
@@ -37,8 +38,10 @@ public class Memoizer <A, V> implements Computable<A, V> {
             try {
                 return f.get();
             } catch (CancellationException e) {
+                /** future被取消，需要移除，否则会污染cache*/
                 cache.remove(arg, f);
             } catch (ExecutionException e) {
+                /** 任务运行中的异常被封装成 ExecutionException 抛出，原始异常通过getCause获得*/
                 throw LaunderThrowable.launderThrowable(e.getCause());
             }
         }

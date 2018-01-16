@@ -20,6 +20,12 @@ public class Memoizer1 <A, V> implements Computable<A, V> {
         this.c = c;
     }
 
+    /**
+     * 同步了整个方法，并发性很低，虽然线程使hashmap线程安全了，但同时只有一个线程计算
+     * @param arg
+     * @return
+     * @throws InterruptedException
+     */
     public synchronized V compute(A arg) throws InterruptedException {
         V result = cache.get(arg);
         if (result == null) {

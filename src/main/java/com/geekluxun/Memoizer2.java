@@ -11,6 +11,7 @@ import java.util.concurrent.*;
  * @author Brian Goetz and Tim Peierls
  */
 public class Memoizer2 <A, V> implements Computable<A, V> {
+    /** 使用同步的hashmap 伸缩性强*/
     private final Map<A, V> cache = new ConcurrentHashMap<A, V>();
     private final Computable<A, V> c;
 

@@ -28,7 +28,12 @@ public abstract class TransformingSequential {
 
     public abstract void process(Element e);
 
-
+    /**
+     * 串行递归
+     * @param nodes
+     * @param results
+     * @param <T>
+     */
     public <T> void sequentialRecursive(List<Node<T>> nodes,
                                         Collection<T> results) {
         for (Node<T> n : nodes) {
@@ -37,6 +42,13 @@ public abstract class TransformingSequential {
         }
     }
 
+    /**
+     * 并行递归
+     * @param exec
+     * @param nodes
+     * @param results
+     * @param <T>
+     */
     public <T> void parallelRecursive(final Executor exec,
                                       List<Node<T>> nodes,
                                       final Collection<T> results) {
