@@ -15,6 +15,9 @@ import net.jcip.annotations.*;
 @ThreadSafe
 public class ConditionBoundedBuffer <T> {
     protected final Lock lock = new ReentrantLock();
+    /**
+     * 两个条件谓词放在不同的condition中，区别wait notify
+     */
     // CONDITION PREDICATE: notFull (count < items.length)
     private final Condition notFull = lock.newCondition();
     // CONDITION PREDICATE: notEmpty (count > 0)

@@ -13,7 +13,7 @@ import java.util.concurrent.*;
 public class BoundedHashSet <T> {
     private final Set<T> set;
     private final Semaphore sem;
-
+    /** 通过信号量实现一个有界容器*/
     public BoundedHashSet(int bound) {
         this.set = Collections.synchronizedSet(new HashSet<T>());
         sem = new Semaphore(bound);

@@ -37,6 +37,7 @@ public class CellularAutomata {
                     for (int y = 0; y < board.getMaxY(); y++)
                         board.setNewValue(x, y, computeValue(x, y));
                 try {
+                    /**阻塞， 做完工作在关卡处等待其他线程到达关卡*/
                     barrier.await();
                 } catch (InterruptedException ex) {
                     return;

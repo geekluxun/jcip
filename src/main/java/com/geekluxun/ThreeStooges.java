@@ -23,6 +23,7 @@ import net.jcip.annotations.*;
     }
 
     public boolean isStooge(String name) {
+        stooges.add("luxun");
         return stooges.contains(name);
     }
 
@@ -32,5 +33,10 @@ import net.jcip.annotations.*;
         stooges.add("Larry");
         stooges.add("Curly");
         return stooges.toString();
+    }
+
+    public static void main(String[] argc){
+        ThreeStooges threeStooges = new ThreeStooges();
+        System.out.println("result:" + threeStooges.isStooge("luxun"));
     }
 }
