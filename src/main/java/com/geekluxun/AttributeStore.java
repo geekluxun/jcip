@@ -6,6 +6,7 @@ import java.util.regex.*;
 import net.jcip.annotations.*;
 
 /**
+ * 代码清单11.4
  * AttributeStore
  * <p/>
  * Holding a lock longer than necessary
@@ -14,11 +15,17 @@ import net.jcip.annotations.*;
  */
 @ThreadSafe
 public class AttributeStore {
-    @GuardedBy("this") private final Map<String, String>
-            attributes = new HashMap<String, String>();
+    @GuardedBy("this") 
+    private final Map<String, String> attributes = new HashMap<String, String>();
 
-    public synchronized boolean userLocationMatches(String name,
-                                                    String regexp) {
+    /**
+     * 这个是一个不好的示例，持有锁超过必要的时间，只有attributes.get需要加锁，但是整个方法加锁
+     * 会减少并发度影响这个方法的吞吐量
+     * @param name
+     * @param regexp
+     * @return
+     */
+    public synchronized boolean userLocationMatches(String name, String regexp) {
         String key = "users." + name + ".location";
         String location = attributes.get(key);
         if (location == null)

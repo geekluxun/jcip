@@ -6,7 +6,7 @@ import java.util.*;
  * Animals
  * <p/>
  * Thread confinement of local primitive and reference variables
- *
+ * 通过方法的局部变量实现线程封闭，即不共享变量，线程安全的。
  * @author Brian Goetz and Tim Peierls
  */
 public class Animals {
@@ -23,9 +23,15 @@ public class Animals {
         animals = new TreeSet<Animal>(new SpeciesGenderComparator());
         animals.addAll(candidates);
         for (Animal a : animals) {
+            /**
+             * 不是异性
+             */
             if (candidate == null || !candidate.isPotentialMate(a))
                 candidate = a;
             else {
+                /**
+                 * 是异性一对，匹配成功
+                 */
                 ark.load(new AnimalPair(candidate, a));
                 ++numPairs;
                 candidate = null;
@@ -67,6 +73,9 @@ public class Animals {
     class SpeciesGenderComparator implements Comparator<Animal> {
         public int compare(Animal one, Animal two) {
             int speciesCompare = one.species.compareTo(two.species);
+            /**
+             * 动物类型相同再去比较性别
+             */
             return (speciesCompare != 0)
                     ? speciesCompare
                     : one.gender.compareTo(two.gender);

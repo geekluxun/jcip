@@ -10,20 +10,26 @@ import java.util.concurrent.*;
  * @author Brian Goetz and Tim Peierls
  */
 
-public abstract class BackgroundTask <V> implements Runnable, Future<V> {
+public abstract class BackgroundTask<V> implements Runnable, Future<V> {
     private final FutureTask<V> computation = new Computation();
 
     private class Computation extends FutureTask<V> {
         public Computation() {
+            /**
+             * 把一个Callable任务提交给FutureTask执行
+             */
             super(new Callable<V>() {
+                @Override
                 public V call() throws Exception {
                     return BackgroundTask.this.compute();
                 }
             });
         }
 
+        @Override
         protected final void done() {
             GuiExecutor.instance().execute(new Runnable() {
+                @Override
                 public void run() {
                     V value = null;
                     Throwable thrown = null;
@@ -45,6 +51,7 @@ public abstract class BackgroundTask <V> implements Runnable, Future<V> {
 
     protected void setProgress(final int current, final int max) {
         GuiExecutor.instance().execute(new Runnable() {
+            @Override
             public void run() {
                 onProgress(current, max);
             }
@@ -63,29 +70,32 @@ public abstract class BackgroundTask <V> implements Runnable, Future<V> {
     }
 
     // Other Future methods just forwarded to computation
+    @Override
     public boolean cancel(boolean mayInterruptIfRunning) {
         return computation.cancel(mayInterruptIfRunning);
     }
 
+    @Override
     public V get() throws InterruptedException, ExecutionException {
         return computation.get();
     }
 
-    public V get(long timeout, TimeUnit unit)
-            throws InterruptedException,
-            ExecutionException,
-            TimeoutException {
+    @Override
+    public V get(long timeout, TimeUnit unit) throws InterruptedException, ExecutionException, TimeoutException {
         return computation.get(timeout, unit);
     }
 
+    @Override
     public boolean isCancelled() {
         return computation.isCancelled();
     }
 
+    @Override
     public boolean isDone() {
         return computation.isDone();
     }
 
+    @Override
     public void run() {
         computation.run();
     }
