@@ -1,9 +1,12 @@
 package com.geekluxun;
 
-import java.math.BigInteger;
-import javax.servlet.*;
+import net.jcip.annotations.ThreadSafe;
 
-import net.jcip.annotations.*;
+import javax.servlet.GenericServlet;
+import javax.servlet.Servlet;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import java.math.BigInteger;
 
 /**
  * Factorizer
@@ -16,15 +19,16 @@ import net.jcip.annotations.*;
 public class Factorizer extends GenericServlet implements Servlet {
     private final Computable<BigInteger, BigInteger[]> c =
             new Computable<BigInteger, BigInteger[]>() {
+                @Override
                 public BigInteger[] compute(BigInteger arg) {
                     return factor(arg);
                 }
             };
-    private final Computable<BigInteger, BigInteger[]> cache
-            = new Memoizer<BigInteger, BigInteger[]>(c);
+    
+    private final Computable<BigInteger, BigInteger[]> cache = new Memoizer<BigInteger, BigInteger[]>(c);
 
-    public void service(ServletRequest req,
-                        ServletResponse resp) {
+    @Override
+    public void service(ServletRequest req, ServletResponse resp) {
         try {
             BigInteger i = extractFromRequest(req);
             encodeIntoResponse(resp, cache.compute(i));

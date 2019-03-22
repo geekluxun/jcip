@@ -21,8 +21,7 @@ public class BoundedExecutor {
         this.semaphore = new Semaphore(bound);
     }
 
-    public void submitTask(final Runnable command)
-            throws InterruptedException {
+    public void submitTask(final Runnable command) throws InterruptedException {
         semaphore.acquire();
         try {
             exec.execute(new Runnable() {

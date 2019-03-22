@@ -12,6 +12,34 @@ import net.jcip.annotations.*;
  * @author Brian Goetz and Tim Peierls
  */
 public class CooperatingDeadlock {
+    
+    public static void main(String[] argc){
+        CooperatingDeadlock demo = new CooperatingDeadlock();
+        demo.demo1();
+    }
+
+    /**
+     * 模拟两线程，彼此都持有对方锁，导致死锁
+     */
+    private void demo1(){
+        Dispatcher dispatcher = new Dispatcher();
+        Taxi taxi = new Taxi(dispatcher);
+        
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                taxi.setLocation(new Point(1,2));
+            }
+        }).start();
+        
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                dispatcher.getImage();
+            }
+        }).start();
+    }
+    
     // Warning: deadlock-prone!
     class Taxi {
         @GuardedBy("this") private Point location, destination;

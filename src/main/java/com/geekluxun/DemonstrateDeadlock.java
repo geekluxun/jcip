@@ -30,6 +30,9 @@ public class DemonstrateDeadlock {
                     int toAcct = rnd.nextInt(NUM_ACCOUNTS);
                     DynamicOrderDeadlock.DollarAmount amount = new DynamicOrderDeadlock.DollarAmount(rnd.nextInt(1000));
                     try {
+                        /**
+                         * 两个账户同时互相转账会出现死锁
+                         */
                         DynamicOrderDeadlock.transferMoney(accounts[fromAcct], accounts[toAcct], amount);
                     } catch (DynamicOrderDeadlock.InsufficientFundsException ignored) {
                     }

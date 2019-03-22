@@ -13,7 +13,7 @@ import java.sql.SQLException;
  */
 public class ConnectionDispenser {
     static String DB_URL = "jdbc:mysql://localhost/mydatabase";
-
+    
     private ThreadLocal<Connection> connectionHolder
             = new ThreadLocal<Connection>() {
                 public Connection initialValue() {

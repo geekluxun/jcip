@@ -30,7 +30,10 @@ public class CellularAutomata {
     private class Worker implements Runnable {
         private final Board board;
 
-        public Worker(Board board) { this.board = board; }
+        public Worker(Board board) { 
+            this.board = board;
+        }
+        
         public void run() {
             while (!board.hasConverged()) {
                 for (int x = 0; x < board.getMaxX(); x++)

@@ -1,6 +1,6 @@
 package com.geekluxun;
 
-import java.util.*;
+import java.util.List;
 import java.util.concurrent.*;
 
 import static com.geekluxun.LaunderThrowable.launderThrowable;

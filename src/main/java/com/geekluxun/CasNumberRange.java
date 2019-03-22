@@ -12,9 +12,9 @@ import net.jcip.annotations.*;
  * @author Brian Goetz and Tim Peierls
  */
 @ThreadSafe
-        public class CasNumberRange {
+public class CasNumberRange {
     @Immutable
-            private static class IntPair {
+    private static class IntPair {
         // INVARIANT: lower <= upper
         final int lower;
         final int upper;

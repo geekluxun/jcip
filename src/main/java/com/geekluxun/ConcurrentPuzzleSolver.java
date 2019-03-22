@@ -52,8 +52,7 @@ public class ConcurrentPuzzleSolver <P, M> {
         }
 
         public void run() {
-            if (solution.isSet()
-                    || seen.putIfAbsent(pos, true) != null)
+            if (solution.isSet() || seen.putIfAbsent(pos, true) != null)
                 return; // already solved or seen this position
             if (puzzle.isGoal(pos))
                 solution.setValue(this);

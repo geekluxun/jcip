@@ -14,7 +14,8 @@ import net.jcip.annotations.*;
 class CooperatingNoDeadlock {
     @ThreadSafe
     class Taxi {
-        @GuardedBy("this") private Point location, destination;
+        @GuardedBy("this") 
+        private Point location, destination;
         private final Dispatcher dispatcher;
 
         public Taxi(Dispatcher dispatcher) {

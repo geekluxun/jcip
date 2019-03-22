@@ -1,8 +1,9 @@
 package com.geekluxun;
 
-import java.util.*;
-import java.util.concurrent.*;
-import java.util.concurrent.locks.*;
+import java.util.Random;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.Lock;
+
 import static java.util.concurrent.TimeUnit.NANOSECONDS;
 
 /**
@@ -27,6 +28,9 @@ public class DeadlockAvoidance {
 
         while (true) {
             if (fromAcct.lock.tryLock()) {
+                /**
+                 * 如果两个账户同时互相转账，都执行到此，如果不用tryLock会产生死锁
+                 */
                 try {
                     if (toAcct.lock.tryLock()) {
                         try {

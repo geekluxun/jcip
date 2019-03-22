@@ -1,6 +1,6 @@
 package com.geekluxun;
 
-import java.util.concurrent.atomic.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * DynamicOrderDeadlock
@@ -13,8 +13,7 @@ public class DynamicOrderDeadlock {
     // Warning: deadlock-prone!
     public static void transferMoney(Account fromAccount,
                                      Account toAccount,
-                                     DollarAmount amount)
-            throws InsufficientFundsException {
+                                     DollarAmount amount) throws InsufficientFundsException {
         synchronized (fromAccount) {
             synchronized (toAccount) {
                 if (fromAccount.getBalance().compareTo(amount) < 0)

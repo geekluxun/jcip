@@ -15,6 +15,7 @@ public class DoubleCheckedLocking {
 
     public static Resource getInstance() {
         if (resource == null) {
+            // TODO 放在class对象上？？
             synchronized (DoubleCheckedLocking.class) {
                 if (resource == null)
                     resource = new Resource();

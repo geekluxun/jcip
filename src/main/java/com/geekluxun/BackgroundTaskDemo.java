@@ -1,6 +1,7 @@
 package com.geekluxun;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.math.RoundingMode;
 import java.util.concurrent.TimeUnit;
 
@@ -15,6 +16,9 @@ import java.util.concurrent.TimeUnit;
 public class BackgroundTaskDemo extends BackgroundTask {
 
     public static void main(String[] argc) throws Exception {
+
+        BigInteger[] a = new BigInteger[]{BigInteger.valueOf(3L)};
+
         BackgroundTaskDemo demo = new BackgroundTaskDemo();
         // TODO 阻塞在此??
         demo.run();
@@ -26,6 +30,7 @@ public class BackgroundTaskDemo extends BackgroundTask {
                 demo.cancel(true);
             }
         }
+
 
     }
 

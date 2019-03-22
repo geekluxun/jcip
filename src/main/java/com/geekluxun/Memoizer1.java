@@ -41,8 +41,8 @@ interface Computable <A, V> {
     V compute(A arg) throws InterruptedException;
 }
 
-class ExpensiveFunction
-        implements Computable<String, BigInteger> {
+class ExpensiveFunction implements Computable<String, BigInteger> {
+    @Override
     public BigInteger compute(String arg) {
         // after deep thought...
         return new BigInteger(arg);
