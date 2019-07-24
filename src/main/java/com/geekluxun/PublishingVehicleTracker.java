@@ -23,6 +23,10 @@ public class PublishingVehicleTracker {
         this.unmodifiableMap = Collections.unmodifiableMap(this.locations);
     }
 
+    /**
+     * 返回的是不可变的拷贝，所以是线程安全的
+     * @return
+     */
     public Map<String, SafePoint> getLocations() {
         return unmodifiableMap;
     }
@@ -35,5 +39,6 @@ public class PublishingVehicleTracker {
         if (!locations.containsKey(id))
             throw new IllegalArgumentException("invalid vehicle name: " + id);
         locations.get(id).set(x, y);
+        
     }
 }

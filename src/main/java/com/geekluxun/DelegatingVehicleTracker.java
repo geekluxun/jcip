@@ -18,6 +18,10 @@ import java.util.concurrent.ConcurrentMap;
  */
 @ThreadSafe
 public class DelegatingVehicleTracker {
+   
+    /**
+     * 将线程安全委托到 ConcurrentMap
+     */
     private final ConcurrentMap<String, Point> locations;
     private final Map<String, Point> unmodifiableMap;
 

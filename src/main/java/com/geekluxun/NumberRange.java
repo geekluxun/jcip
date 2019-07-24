@@ -15,6 +15,11 @@ public class NumberRange {
     private final AtomicInteger lower = new AtomicInteger(0);
     private final AtomicInteger upper = new AtomicInteger(0);
 
+    /**
+     * 这种check then act 两个操作组合必须是原子性的，即使单个操作时原子性的，但组合还是线程不安全的
+     *
+     * @param i
+     */
     public void setLower(int i) {
         // Warning -- unsafe check-then-act
         if (i > upper.get())

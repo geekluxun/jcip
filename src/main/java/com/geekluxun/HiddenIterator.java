@@ -29,6 +29,7 @@ public class HiddenIterator {
         Random r = new Random();
         for (int i = 0; i < 10; i++)
             add(r.nextInt());
+        // 这里隐藏着对set迭代的操作 ，容器如果在迭代过程中被修改，就会抛并发修改异常
         System.out.println("DEBUG: added ten elements to " + set);
     }
 }

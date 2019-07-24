@@ -12,6 +12,9 @@ public class NoVisibility {
     private static boolean ready;
     private static int number;
 
+    /**
+     * 子线程读 结果并不一定是42
+     */
     private static class ReaderThread extends Thread {
         public void run() {
             while (!ready)
@@ -20,6 +23,10 @@ public class NoVisibility {
         }
     }
 
+    /**
+     *  主线程写
+     * @param args
+     */
     public static void main(String[] args) {
         new ReaderThread().start();
         number = 42;

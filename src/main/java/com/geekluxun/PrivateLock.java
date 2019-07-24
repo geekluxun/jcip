@@ -10,6 +10,9 @@ import net.jcip.annotations.GuardedBy;
  * @author Brian Goetz and Tim Peierls
  */
 public class PrivateLock {
+    /**
+     * 这里使用了一个私有锁，而不是对象锁
+     */
     private final Object myLock = new Object();
     @GuardedBy("myLock")
     Widget widget;
