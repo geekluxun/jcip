@@ -1,9 +1,11 @@
 package com.geekluxun;
 
-import java.util.*;
-import java.util.regex.*;
+import net.jcip.annotations.GuardedBy;
+import net.jcip.annotations.ThreadSafe;
 
-import net.jcip.annotations.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.regex.Pattern;
 
 /**
  * 代码清单11.4
@@ -15,12 +17,13 @@ import net.jcip.annotations.*;
  */
 @ThreadSafe
 public class AttributeStore {
-    @GuardedBy("this") 
+    @GuardedBy("this")
     private final Map<String, String> attributes = new HashMap<String, String>();
 
     /**
      * 这个是一个不好的示例，持有锁超过必要的时间，只有attributes.get需要加锁，但是整个方法加锁
      * 会减少并发度影响这个方法的吞吐量
+     *
      * @param name
      * @param regexp
      * @return

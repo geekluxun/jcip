@@ -15,7 +15,7 @@ public class TimeBudget {
 
     public List<TravelQuote> getRankedTravelQuotes(TravelInfo travelInfo, Set<TravelCompany> companies,
                                                    Comparator<TravelQuote> ranking, long time, TimeUnit unit)
-            throws InterruptedException {
+        throws InterruptedException {
         List<QuoteTask> tasks = new ArrayList<QuoteTask>();
         for (TravelCompany company : companies)
             tasks.add(new QuoteTask(company, travelInfo));
@@ -23,7 +23,7 @@ public class TimeBudget {
         List<Future<TravelQuote>> futures = exec.invokeAll(tasks, time, unit);
 
         List<TravelQuote> quotes =
-                new ArrayList<TravelQuote>(tasks.size());
+            new ArrayList<TravelQuote>(tasks.size());
         Iterator<QuoteTask> taskIter = tasks.iterator();
         for (Future<TravelQuote> f : futures) {
             QuoteTask task = taskIter.next();

@@ -1,10 +1,12 @@
 package com.geekluxun;
 
-import java.util.concurrent.*;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.FutureTask;
 
 /**
  * Preloader
- *
+ * <p>
  * Using FutureTask to preload data that is needed later
  *
  * @author Brian Goetz and Tim Peierls
@@ -23,10 +25,12 @@ public class Preloader {
         });
     private final Thread thread = new Thread(future);
 
-    public void start() { thread.start(); }
+    public void start() {
+        thread.start();
+    }
 
     public ProductInfo get()
-            throws DataLoadException, InterruptedException {
+        throws DataLoadException, InterruptedException {
         try {
             return future.get();
         } catch (ExecutionException e) {
@@ -42,4 +46,5 @@ public class Preloader {
     }
 }
 
-class DataLoadException extends Exception { }
+class DataLoadException extends Exception {
+}

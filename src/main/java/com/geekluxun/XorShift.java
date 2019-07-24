@@ -1,6 +1,6 @@
 package com.geekluxun;
 
-import java.util.concurrent.atomic.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * XorShift

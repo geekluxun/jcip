@@ -1,6 +1,6 @@
 package com.geekluxun;
 
-import java.util.concurrent.*;
+import java.util.concurrent.CountDownLatch;
 
 /**
  * TestHarness
@@ -11,7 +11,7 @@ import java.util.concurrent.*;
  */
 public class TestHarness {
     public long timeTasks(int nThreads, final Runnable task)
-            throws InterruptedException {
+        throws InterruptedException {
 
         /**开始阀门*/
         final CountDownLatch startGate = new CountDownLatch(1);

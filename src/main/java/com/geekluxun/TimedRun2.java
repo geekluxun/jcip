@@ -1,6 +1,7 @@
 package com.geekluxun;
 
-import java.util.concurrent.*;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import static com.geekluxun.LaunderThrowable.launderThrowable;
 import static java.util.concurrent.Executors.newScheduledThreadPool;
@@ -17,7 +18,7 @@ public class TimedRun2 {
 
     public static void timedRun(final Runnable r,
                                 long timeout, TimeUnit unit)
-            throws InterruptedException {
+        throws InterruptedException {
         class RethrowableTask implements Runnable {
             private volatile Throwable t;
 

@@ -44,7 +44,9 @@ public abstract class BackgroundTask<V> implements Runnable, Future<V> {
                     } finally {
                         onCompletion(value, thrown, cancelled);
                     }
-                };
+                }
+
+                ;
             });
         }
     }

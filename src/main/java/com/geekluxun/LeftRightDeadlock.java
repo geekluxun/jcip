@@ -2,7 +2,7 @@ package com.geekluxun;
 
 /**
  * LeftRightDeadlock
- *
+ * <p>
  * Simple lock-ordering deadlock
  *
  * @author Brian Goetz and Tim Peierls

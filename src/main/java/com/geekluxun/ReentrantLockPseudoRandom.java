@@ -1,8 +1,9 @@
 package com.geekluxun;
 
-import java.util.concurrent.locks.*;
+import net.jcip.annotations.ThreadSafe;
 
-import net.jcip.annotations.*;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * ReentrantLockPseudoRandom

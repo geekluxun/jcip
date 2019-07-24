@@ -1,6 +1,6 @@
 package com.geekluxun;
 
-import java.util.concurrent.*;
+import java.util.concurrent.ThreadFactory;
 
 /**
  * MyThreadFactory

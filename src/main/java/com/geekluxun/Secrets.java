@@ -1,10 +1,11 @@
 package com.geekluxun;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Secrets
- *
+ * <p>
  * Publishing an object
  *
  * @author Brian Goetz and Tim Peierls

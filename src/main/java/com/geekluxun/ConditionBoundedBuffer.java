@@ -1,8 +1,11 @@
 package com.geekluxun;
 
-import java.util.concurrent.locks.*;
+import net.jcip.annotations.GuardedBy;
+import net.jcip.annotations.ThreadSafe;
 
-import net.jcip.annotations.*;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * ConditionBoundedBuffer
@@ -13,7 +16,7 @@ import net.jcip.annotations.*;
  */
 
 @ThreadSafe
-public class ConditionBoundedBuffer <T> {
+public class ConditionBoundedBuffer<T> {
     protected final Lock lock = new ReentrantLock();
     /**
      * 两个条件谓词放在不同的condition中，区别wait notify
@@ -23,8 +26,10 @@ public class ConditionBoundedBuffer <T> {
     // CONDITION PREDICATE: notEmpty (count > 0)
     private final Condition notEmpty = lock.newCondition();
     private static final int BUFFER_SIZE = 100;
-    @GuardedBy("lock") private final T[] items = (T[]) new Object[BUFFER_SIZE];
-    @GuardedBy("lock") private int tail, head, count;
+    @GuardedBy("lock")
+    private final T[] items = (T[]) new Object[BUFFER_SIZE];
+    @GuardedBy("lock")
+    private int tail, head, count;
 
     // BLOCKS-UNTIL: notFull
     public void put(T x) throws InterruptedException {

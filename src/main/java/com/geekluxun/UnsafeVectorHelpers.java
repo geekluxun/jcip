@@ -1,6 +1,6 @@
 package com.geekluxun;
 
-import java.util.*;
+import java.util.Vector;
 
 /**
  * UnsafeVectorHelpers

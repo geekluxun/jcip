@@ -1,33 +1,35 @@
 package com.geekluxun;
 
-import java.util.concurrent.atomic.*;
+import net.jcip.annotations.ThreadSafe;
 
-import net.jcip.annotations.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * AtomicPseudoRandom
  * <p/>
  * Random number generator using AtomicInteger
  * 原子变量实现随机数
+ *
  * @author Brian Goetz and Tim Peierls
  */
 @ThreadSafe
 public class AtomicPseudoRandom extends PseudoRandom {
     private AtomicInteger seed;
-    
-    public static void main(String[] argc){
+
+    public static void main(String[] argc) {
         AtomicPseudoRandom random = new AtomicPseudoRandom(100);
-        for (int i = 0; i < 10 ; i++){
+        for (int i = 0; i < 10; i++) {
             System.out.println("random:" + random.nextInt(500));
         }
     }
-    
+
     AtomicPseudoRandom(int seed) {
         this.seed = new AtomicInteger(seed);
     }
 
     /**
      * 产生n之内的随机数
+     *
      * @param n
      * @return
      */

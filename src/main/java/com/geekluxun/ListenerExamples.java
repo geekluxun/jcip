@@ -1,11 +1,13 @@
 package com.geekluxun;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.*;
-import java.util.concurrent.*;
-import javax.swing.*;
+import java.util.Random;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 /**
  * ListenerExamples
@@ -117,6 +119,7 @@ public class ListenerExamples {
             public void actionPerformed(ActionEvent e) {
                 class CancelListener implements ActionListener {
                     BackgroundTask<?> task;
+
                     public void actionPerformed(ActionEvent event) {
                         if (task != null)
                             task.cancel(true);

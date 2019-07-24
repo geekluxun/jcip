@@ -1,9 +1,11 @@
 package com.geekluxun;
 
-import java.util.*;
-import java.util.regex.*;
+import net.jcip.annotations.GuardedBy;
+import net.jcip.annotations.ThreadSafe;
 
-import net.jcip.annotations.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.regex.Pattern;
 
 /**
  * BetterAttributeStore
@@ -14,8 +16,9 @@ import net.jcip.annotations.*;
  */
 @ThreadSafe
 public class BetterAttributeStore {
-    @GuardedBy("this") private final Map<String, String>
-            attributes = new HashMap<String, String>();
+    @GuardedBy("this")
+    private final Map<String, String>
+        attributes = new HashMap<String, String>();
 
     public boolean userLocationMatches(String name, String regexp) {
         String key = "users." + name + ".location";

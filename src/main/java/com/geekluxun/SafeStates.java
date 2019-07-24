@@ -1,8 +1,9 @@
 package com.geekluxun;
 
-import java.util.*;
+import net.jcip.annotations.ThreadSafe;
 
-import net.jcip.annotations.*;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * SafeStates

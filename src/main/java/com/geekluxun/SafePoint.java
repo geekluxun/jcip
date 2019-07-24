@@ -1,6 +1,7 @@
 package com.geekluxun;
 
-import net.jcip.annotations.*;
+import net.jcip.annotations.GuardedBy;
+import net.jcip.annotations.ThreadSafe;
 
 /**
  * SafePoint
@@ -9,7 +10,8 @@ import net.jcip.annotations.*;
  */
 @ThreadSafe
 public class SafePoint {
-    @GuardedBy("this") private int x, y;
+    @GuardedBy("this")
+    private int x, y;
 
     private SafePoint(int[] a) {
         this(a[0], a[1]);

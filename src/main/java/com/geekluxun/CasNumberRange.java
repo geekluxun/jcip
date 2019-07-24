@@ -1,8 +1,9 @@
 package com.geekluxun;
 
-import java.util.concurrent.atomic.*;
+import net.jcip.annotations.Immutable;
+import net.jcip.annotations.ThreadSafe;
 
-import net.jcip.annotations.*;
+import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * CasNumberRange
@@ -26,7 +27,7 @@ public class CasNumberRange {
     }
 
     private final AtomicReference<IntPair> values =
-            new AtomicReference<IntPair>(new IntPair(0, 0));
+        new AtomicReference<IntPair>(new IntPair(0, 0));
 
     public int getLower() {
         return values.get().lower;

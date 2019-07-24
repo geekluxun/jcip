@@ -1,8 +1,9 @@
 package com.geekluxun;
 
-import java.util.*;
+import net.jcip.annotations.GuardedBy;
 
-import net.jcip.annotations.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * CooperatingDeadlock
@@ -12,8 +13,8 @@ import net.jcip.annotations.*;
  * @author Brian Goetz and Tim Peierls
  */
 public class CooperatingDeadlock {
-    
-    public static void main(String[] argc){
+
+    public static void main(String[] argc) {
         CooperatingDeadlock demo = new CooperatingDeadlock();
         demo.demo1();
     }
@@ -21,17 +22,17 @@ public class CooperatingDeadlock {
     /**
      * 模拟两线程，彼此都持有对方锁，导致死锁
      */
-    private void demo1(){
+    private void demo1() {
         Dispatcher dispatcher = new Dispatcher();
         Taxi taxi = new Taxi(dispatcher);
-        
+
         new Thread(new Runnable() {
             @Override
             public void run() {
-                taxi.setLocation(new Point(1,2));
+                taxi.setLocation(new Point(1, 2));
             }
         }).start();
-        
+
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -39,10 +40,11 @@ public class CooperatingDeadlock {
             }
         }).start();
     }
-    
+
     // Warning: deadlock-prone!
     class Taxi {
-        @GuardedBy("this") private Point location, destination;
+        @GuardedBy("this")
+        private Point location, destination;
         private final Dispatcher dispatcher;
 
         public Taxi(Dispatcher dispatcher) {
@@ -69,8 +71,10 @@ public class CooperatingDeadlock {
     }
 
     class Dispatcher {
-        @GuardedBy("this") private final Set<Taxi> taxis;
-        @GuardedBy("this") private final Set<Taxi> availableTaxis;
+        @GuardedBy("this")
+        private final Set<Taxi> taxis;
+        @GuardedBy("this")
+        private final Set<Taxi> availableTaxis;
 
         public Dispatcher() {
             taxis = new HashSet<Taxi>();

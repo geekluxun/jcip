@@ -1,8 +1,10 @@
 package com.geekluxun;
 
-import java.util.*;
+import net.jcip.annotations.GuardedBy;
+import net.jcip.annotations.ThreadSafe;
 
-import net.jcip.annotations.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * PersonSet
@@ -14,7 +16,8 @@ import net.jcip.annotations.*;
 
 @ThreadSafe
 public class PersonSet {
-    @GuardedBy("this") private final Set<Person> mySet = new HashSet<Person>();
+    @GuardedBy("this")
+    private final Set<Person> mySet = new HashSet<Person>();
 
     public synchronized void addPerson(Person p) {
         mySet.add(p);

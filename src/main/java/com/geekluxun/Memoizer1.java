@@ -1,19 +1,21 @@
 package com.geekluxun;
 
-import java.math.BigInteger;
-import java.util.*;
+import net.jcip.annotations.GuardedBy;
 
-import net.jcip.annotations.*;
+import java.math.BigInteger;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Memoizer1
- *
+ * <p>
  * Initial cache attempt using HashMap and synchronization
  *
  * @author Brian Goetz and Tim Peierls
  */
-public class Memoizer1 <A, V> implements Computable<A, V> {
-    @GuardedBy("this") private final Map<A, V> cache = new HashMap<A, V>();
+public class Memoizer1<A, V> implements Computable<A, V> {
+    @GuardedBy("this")
+    private final Map<A, V> cache = new HashMap<A, V>();
     private final Computable<A, V> c;
 
     public Memoizer1(Computable<A, V> c) {
@@ -22,6 +24,7 @@ public class Memoizer1 <A, V> implements Computable<A, V> {
 
     /**
      * 同步了整个方法，并发性很低，虽然线程使hashmap线程安全了，但同时只有一个线程计算
+     *
      * @param arg
      * @return
      * @throws InterruptedException
@@ -37,7 +40,7 @@ public class Memoizer1 <A, V> implements Computable<A, V> {
 }
 
 
-interface Computable <A, V> {
+interface Computable<A, V> {
     V compute(A arg) throws InterruptedException;
 }
 

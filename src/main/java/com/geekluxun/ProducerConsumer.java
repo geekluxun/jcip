@@ -2,7 +2,8 @@ package com.geekluxun;
 
 import java.io.File;
 import java.io.FileFilter;
-import java.util.concurrent.*;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 /**
  * ProducerConsumer
@@ -71,7 +72,9 @@ public class ProducerConsumer {
 
         public void indexFile(File file) {
             // Index the file...
-        };
+        }
+
+        ;
     }
 
     private static final int BOUND = 10;

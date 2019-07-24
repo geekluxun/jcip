@@ -1,7 +1,9 @@
 package com.geekluxun;
 
-import java.util.*;
-import java.util.concurrent.*;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.concurrent.Semaphore;
 
 /**
  * BoundedHashSet
@@ -10,10 +12,13 @@ import java.util.concurrent.*;
  *
  * @author Brian Goetz and Tim Peierls
  */
-public class BoundedHashSet <T> {
+public class BoundedHashSet<T> {
     private final Set<T> set;
     private final Semaphore sem;
-    /** 通过信号量实现一个有界容器*/
+
+    /**
+     * 通过信号量实现一个有界容器
+     */
     public BoundedHashSet(int bound) {
         this.set = Collections.synchronizedSet(new HashSet<T>());
         sem = new Semaphore(bound);

@@ -1,7 +1,7 @@
 package com.geekluxun;
 
 import java.math.BigInteger;
-import java.util.concurrent.*;
+import java.util.concurrent.BlockingQueue;
 
 /**
  * BrokenPrimeProducer

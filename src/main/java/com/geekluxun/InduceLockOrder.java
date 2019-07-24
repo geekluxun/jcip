@@ -2,7 +2,7 @@ package com.geekluxun;
 
 /**
  * InduceLockOrder
- *
+ * <p>
  * Inducing a lock order to avoid deadlock
  *
  * @author Brian Goetz and Tim Peierls
@@ -13,7 +13,7 @@ public class InduceLockOrder {
     public void transferMoney(final Account fromAcct,
                               final Account toAcct,
                               final DollarAmount amount)
-            throws InsufficientFundsException {
+        throws InsufficientFundsException {
         class Helper {
             public void transfer() throws InsufficientFundsException {
                 if (fromAcct.getBalance().compareTo(amount) < 0)

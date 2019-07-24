@@ -1,7 +1,6 @@
 package com.geekluxun;
 
-import java.util.*;
-
+import java.util.Random;
 
 
 /**

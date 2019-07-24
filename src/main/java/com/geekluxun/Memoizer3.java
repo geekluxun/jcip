@@ -1,6 +1,6 @@
 package com.geekluxun;
 
-import java.util.*;
+import java.util.Map;
 import java.util.concurrent.*;
 
 /**
@@ -10,20 +10,21 @@ import java.util.concurrent.*;
  *
  * @author Brian Goetz and Tim Peierls
  */
-public class Memoizer3 <A, V> implements Computable<A, V> {
-    private final Map<A, Future<V>> cache
-            = new ConcurrentHashMap<A, Future<V>>();
+public class Memoizer3<A, V> implements Computable<A, V> {
+    private final Map<A, Future<V>> cache = new ConcurrentHashMap<A, Future<V>>();
     private final Computable<A, V> c;
 
     public Memoizer3(Computable<A, V> c) {
         this.c = c;
     }
 
+    @Override
     public V compute(final A arg) throws InterruptedException {
         Future<V> f = cache.get(arg);
         /** cache里没有则去计算 ，但  存在 cache.get 和f == null  这个组合操作不是原子性的缺陷*/
         if (f == null) {
             Callable<V> eval = new Callable<V>() {
+                @Override
                 public V call() throws InterruptedException {
                     return c.compute(arg);
                 }

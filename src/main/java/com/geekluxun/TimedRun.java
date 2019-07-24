@@ -16,7 +16,7 @@ public class TimedRun {
 
     public static void timedRun(Runnable r,
                                 long timeout, TimeUnit unit)
-            throws InterruptedException {
+        throws InterruptedException {
         Future<?> task = taskExec.submit(r);
         try {
             task.get(timeout, unit);

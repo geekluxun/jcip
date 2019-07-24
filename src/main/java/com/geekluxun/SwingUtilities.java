@@ -12,7 +12,7 @@ import java.util.concurrent.*;
  */
 public class SwingUtilities {
     private static final ExecutorService exec =
-            Executors.newSingleThreadExecutor(new SwingThreadFactory());
+        Executors.newSingleThreadExecutor(new SwingThreadFactory());
     private static volatile Thread swingThread;
 
     private static class SwingThreadFactory implements ThreadFactory {
@@ -31,7 +31,7 @@ public class SwingUtilities {
     }
 
     public static void invokeAndWait(Runnable task)
-            throws InterruptedException, InvocationTargetException {
+        throws InterruptedException, InvocationTargetException {
         Future f = exec.submit(task);
         try {
             f.get();

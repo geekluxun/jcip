@@ -1,6 +1,7 @@
 package com.geekluxun;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * SingleThreadRendere
@@ -27,6 +28,8 @@ public abstract class SingleThreadRenderer {
     }
 
     abstract void renderText(CharSequence s);
+
     abstract List<ImageInfo> scanForImageInfo(CharSequence s);
+
     abstract void renderImage(ImageData i);
 }

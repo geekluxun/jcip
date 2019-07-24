@@ -5,6 +5,7 @@ package com.geekluxun;
  * <p/>
  * Barrier-based timer
  * 基于关卡的计时器
+ *
  * @author Brian Goetz and Tim Peierls
  */
 public class BarrierTimer implements Runnable {

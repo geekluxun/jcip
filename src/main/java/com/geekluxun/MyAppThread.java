@@ -1,7 +1,8 @@
 package com.geekluxun;
 
-import java.util.concurrent.atomic.*;
-import java.util.logging.*;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * MyAppThread
@@ -27,7 +28,7 @@ public class MyAppThread extends Thread {
             public void uncaughtException(Thread t,
                                           Throwable e) {
                 log.log(Level.SEVERE,
-                        "UNCAUGHT in thread " + t.getName(), e);
+                    "UNCAUGHT in thread " + t.getName(), e);
             }
         });
     }

@@ -1,8 +1,10 @@
 package com.geekluxun;
 
-import java.util.*;
+import net.jcip.annotations.GuardedBy;
+import net.jcip.annotations.ThreadSafe;
 
-import net.jcip.annotations.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * CooperatingNoDeadlock
@@ -14,7 +16,7 @@ import net.jcip.annotations.*;
 class CooperatingNoDeadlock {
     @ThreadSafe
     class Taxi {
-        @GuardedBy("this") 
+        @GuardedBy("this")
         private Point location, destination;
         private final Dispatcher dispatcher;
 
@@ -47,8 +49,10 @@ class CooperatingNoDeadlock {
 
     @ThreadSafe
     class Dispatcher {
-        @GuardedBy("this") private final Set<Taxi> taxis;
-        @GuardedBy("this") private final Set<Taxi> availableTaxis;
+        @GuardedBy("this")
+        private final Set<Taxi> taxis;
+        @GuardedBy("this")
+        private final Set<Taxi> availableTaxis;
 
         public Dispatcher() {
             taxis = new HashSet<Taxi>();

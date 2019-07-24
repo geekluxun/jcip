@@ -1,8 +1,8 @@
 package com.geekluxun;
 
-import java.util.concurrent.atomic.*;
+import net.jcip.annotations.ThreadSafe;
 
-import net.jcip.annotations.*;
+import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * LinkedQueue
@@ -12,9 +12,9 @@ import net.jcip.annotations.*;
  * @author Brian Goetz and Tim Peierls
  */
 @ThreadSafe
-public class LinkedQueue <E> {
+public class LinkedQueue<E> {
 
-    private static class Node <E> {
+    private static class Node<E> {
         final E item;
         final AtomicReference<Node<E>> next;
 
@@ -26,9 +26,9 @@ public class LinkedQueue <E> {
 
     private final Node<E> dummy = new Node<E>(null, null);
     private final AtomicReference<Node<E>> head
-            = new AtomicReference<Node<E>>(dummy);
+        = new AtomicReference<Node<E>>(dummy);
     private final AtomicReference<Node<E>> tail
-            = new AtomicReference<Node<E>>(dummy);
+        = new AtomicReference<Node<E>>(dummy);
 
     public boolean put(E item) {
         Node<E> newNode = new Node<E>(item, null);

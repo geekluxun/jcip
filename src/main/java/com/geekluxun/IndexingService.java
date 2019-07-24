@@ -2,7 +2,8 @@ package com.geekluxun;
 
 import java.io.File;
 import java.io.FileFilter;
-import java.util.concurrent.*;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 /**
  * IndexingService
@@ -79,7 +80,9 @@ public class IndexingService {
 
         public void indexFile(File file) {
             /*...*/
-        };
+        }
+
+        ;
     }
 
     public void start() {

@@ -1,9 +1,9 @@
 package com.geekluxun;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 import java.util.concurrent.*;
-
-import static com.geekluxun.LaunderThrowable.launderThrowable;
 
 /**
  * FutureRenderer
@@ -14,30 +14,30 @@ import static com.geekluxun.LaunderThrowable.launderThrowable;
  */
 public abstract class FutureRenderer {
     private final ExecutorService executor = Executors.newCachedThreadPool();
-    
+
     void renderPage(CharSequence source) {
         final List<ImageInfo> imageInfos = scanForImageInfo(source);
         Callable<List<ImageData>> task =
-                new Callable<List<ImageData>>() {
-                    @Override
-                    public List<ImageData> call() throws Exception{
-                        int count = 0;
-                        List<ImageData> result = new ArrayList<ImageData>();
-                        for (ImageInfo imageInfo : imageInfos)
-                            result.add(imageInfo.downloadImage());
-                        while (true){
-                            TimeUnit.SECONDS.sleep(2);
-                            System.out.println("图片下载中...");
+            new Callable<List<ImageData>>() {
+                @Override
+                public List<ImageData> call() throws Exception {
+                    int count = 0;
+                    List<ImageData> result = new ArrayList<ImageData>();
+                    for (ImageInfo imageInfo : imageInfos)
+                        result.add(imageInfo.downloadImage());
+                    while (true) {
+                        TimeUnit.SECONDS.sleep(2);
+                        System.out.println("图片下载中...");
 //                            if (count++ > 5){
 //                                Thread.currentThread().interrupt();
 //                            }
-                        }
+                    }
 //                          if (true){
 //                             throw new RuntimeException("下载图片发生了异常");
 //                          }
-                        //return result;
-                    }
-                };
+                    //return result;
+                }
+            };
 
         Future<List<ImageData>> future = executor.submit(task);
         // 控制台任务
@@ -58,9 +58,9 @@ public abstract class FutureRenderer {
             System.out.println("任务线程被中断");
         } catch (ExecutionException e) {
             /** 任务内部执行出现异常的话会转换成ExecutionException异常*/
- //           throw launderThrowable(e.getCause());
+            //           throw launderThrowable(e.getCause());
             System.out.println("任务执行内部发生了异常");
-        } catch (CancellationException e){
+        } catch (CancellationException e) {
             System.out.println("任务被取消了");
         }
     }
@@ -77,25 +77,26 @@ public abstract class FutureRenderer {
     abstract List<ImageInfo> scanForImageInfo(CharSequence s);
 
     abstract void renderImage(ImageData i);
-    
+
     private class ConsoleTask implements Runnable {
-        
+
         private final Future future;
-        private final  ExecutorService executor;
+        private final ExecutorService executor;
         private final Thread mainThread;
-        
-        public ConsoleTask(Future future, ExecutorService executor, Thread thread){
-            this.future  = future;
+
+        public ConsoleTask(Future future, ExecutorService executor, Thread thread) {
+            this.future = future;
             this.executor = executor;
             this.mainThread = thread;
         }
+
         @Override
         public void run() {
             Scanner scanner = new Scanner(System.in);
-            while (true){
+            while (true) {
                 System.out.println("请输入命令...");
                 int command = scanner.nextInt();
-                switch (command){
+                switch (command) {
                     case 1:
                         future.cancel(true);
                         break;

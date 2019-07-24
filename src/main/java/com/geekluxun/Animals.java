@@ -7,6 +7,7 @@ import java.util.*;
  * <p/>
  * Thread confinement of local primitive and reference variables
  * 通过方法的局部变量实现线程封闭，即不共享变量，线程安全的。
+ *
  * @author Brian Goetz and Tim Peierls
  */
 public class Animals {
@@ -77,8 +78,8 @@ public class Animals {
              * 动物类型相同再去比较性别
              */
             return (speciesCompare != 0)
-                    ? speciesCompare
-                    : one.gender.compareTo(two.gender);
+                ? speciesCompare
+                : one.gender.compareTo(two.gender);
         }
     }
 

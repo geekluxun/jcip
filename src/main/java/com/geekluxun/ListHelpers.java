@@ -1,8 +1,11 @@
 package com.geekluxun;
 
-import java.util.*;
+import net.jcip.annotations.NotThreadSafe;
+import net.jcip.annotations.ThreadSafe;
 
-import net.jcip.annotations.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * ListHelder
@@ -14,7 +17,7 @@ import net.jcip.annotations.*;
  */
 
 @NotThreadSafe
-class BadListHelper <E> {
+class BadListHelper<E> {
     public List<E> list = Collections.synchronizedList(new ArrayList<E>());
 
     public synchronized boolean putIfAbsent(E x) {
@@ -26,7 +29,7 @@ class BadListHelper <E> {
 }
 
 @ThreadSafe
-class GoodListHelper <E> {
+class GoodListHelper<E> {
     public List<E> list = Collections.synchronizedList(new ArrayList<E>());
 
     public boolean putIfAbsent(E x) {

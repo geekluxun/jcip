@@ -1,15 +1,18 @@
 package com.geekluxun;
 
-import java.math.BigInteger;
-import javax.servlet.*;
+import net.jcip.annotations.ThreadSafe;
 
-import net.jcip.annotations.*;
+import javax.servlet.GenericServlet;
+import javax.servlet.Servlet;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import java.math.BigInteger;
 
 /**
  * StatelessFactorizer
- *
+ * <p>
  * A stateless servlet
- * 
+ *
  * @author Brian Goetz and Tim Peierls
  */
 @ThreadSafe
@@ -30,6 +33,6 @@ public class StatelessFactorizer extends GenericServlet implements Servlet {
 
     BigInteger[] factor(BigInteger i) {
         // Doesn't really factor
-        return new BigInteger[] { i };
+        return new BigInteger[]{i};
     }
 }

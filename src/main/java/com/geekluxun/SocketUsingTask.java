@@ -1,10 +1,11 @@
 package com.geekluxun;
 
+import net.jcip.annotations.GuardedBy;
+import net.jcip.annotations.ThreadSafe;
+
 import java.io.IOException;
 import java.net.Socket;
 import java.util.concurrent.*;
-
-import net.jcip.annotations.*;
 
 /**
  * SocketUsingTask
@@ -14,8 +15,9 @@ import net.jcip.annotations.*;
  * @author Brian Goetz and Tim Peierls
  */
 
-public abstract class SocketUsingTask <T> implements CancellableTask<T> {
-    @GuardedBy("this") private Socket socket;
+public abstract class SocketUsingTask<T> implements CancellableTask<T> {
+    @GuardedBy("this")
+    private Socket socket;
 
     protected synchronized void setSocket(Socket s) {
         socket = s;
@@ -43,7 +45,7 @@ public abstract class SocketUsingTask <T> implements CancellableTask<T> {
 }
 
 
-interface CancellableTask <T> extends Callable<T> {
+interface CancellableTask<T> extends Callable<T> {
     void cancel();
 
     RunnableFuture<T> newTask();

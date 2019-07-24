@@ -1,6 +1,8 @@
 package com.geekluxun;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.List;
+import java.util.Queue;
 import java.util.concurrent.*;
 
 /**
@@ -30,6 +32,7 @@ public abstract class TransformingSequential {
 
     /**
      * 串行递归
+     *
      * @param nodes
      * @param results
      * @param <T>
@@ -44,6 +47,7 @@ public abstract class TransformingSequential {
 
     /**
      * 并行递归
+     *
      * @param exec
      * @param nodes
      * @param results
@@ -63,7 +67,7 @@ public abstract class TransformingSequential {
     }
 
     public <T> Collection<T> getParallelResults(List<Node<T>> nodes)
-            throws InterruptedException {
+        throws InterruptedException {
         ExecutorService exec = Executors.newCachedThreadPool();
         Queue<T> resultQueue = new ConcurrentLinkedQueue<T>();
         parallelRecursive(exec, nodes, resultQueue);
@@ -75,7 +79,7 @@ public abstract class TransformingSequential {
     interface Element {
     }
 
-    interface Node <T> {
+    interface Node<T> {
         T compute();
 
         List<Node<T>> getChildren();

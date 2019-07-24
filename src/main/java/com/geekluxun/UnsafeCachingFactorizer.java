@@ -1,14 +1,17 @@
 package com.geekluxun;
 
-import java.math.BigInteger;
-import java.util.concurrent.atomic.*;
-import javax.servlet.*;
+import net.jcip.annotations.NotThreadSafe;
 
-import net.jcip.annotations.*;
+import javax.servlet.GenericServlet;
+import javax.servlet.Servlet;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import java.math.BigInteger;
+import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * UnsafeCachingFactorizer
- *
+ * <p>
  * Servlet that attempts to cache its last result without adequate atomicity
  *
  * @author Brian Goetz and Tim Peierls
@@ -17,9 +20,9 @@ import net.jcip.annotations.*;
 @NotThreadSafe
 public class UnsafeCachingFactorizer extends GenericServlet implements Servlet {
     private final AtomicReference<BigInteger> lastNumber
-            = new AtomicReference<BigInteger>();
+        = new AtomicReference<BigInteger>();
     private final AtomicReference<BigInteger[]> lastFactors
-            = new AtomicReference<BigInteger[]>();
+        = new AtomicReference<BigInteger[]>();
 
     public void service(ServletRequest req, ServletResponse resp) {
         BigInteger i = extractFromRequest(req);

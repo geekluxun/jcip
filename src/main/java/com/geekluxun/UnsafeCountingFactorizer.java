@@ -1,13 +1,16 @@
 package com.geekluxun;
 
-import java.math.BigInteger;
-import javax.servlet.*;
+import net.jcip.annotations.NotThreadSafe;
 
-import net.jcip.annotations.*;
+import javax.servlet.GenericServlet;
+import javax.servlet.Servlet;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import java.math.BigInteger;
 
 /**
  * UnsafeCountingFactorizer
- *
+ * <p>
  * Servlet that counts requests without the necessary synchronization
  *
  * @author Brian Goetz and Tim Peierls
@@ -36,6 +39,6 @@ public class UnsafeCountingFactorizer extends GenericServlet implements Servlet 
 
     BigInteger[] factor(BigInteger i) {
         // Doesn't really factor
-        return new BigInteger[] { i };
+        return new BigInteger[]{i};
     }
 }

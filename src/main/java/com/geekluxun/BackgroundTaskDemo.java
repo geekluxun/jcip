@@ -22,11 +22,11 @@ public class BackgroundTaskDemo extends BackgroundTask {
         BackgroundTaskDemo demo = new BackgroundTaskDemo();
         // TODO 阻塞在此??
         demo.run();
-        
-        while (true){
+
+        while (true) {
             System.out.println("等待用户输入指令...");
-            int value  = System.in.read();
-            if (value == 33){
+            int value = System.in.read();
+            if (value == 33) {
                 demo.cancel(true);
             }
         }
@@ -48,7 +48,7 @@ public class BackgroundTaskDemo extends BackgroundTask {
 
         TimeUnit.SECONDS.sleep(2);
         setProgress(79, 99);
-        
+
         TimeUnit.SECONDS.sleep(2);
         setProgress(98, 99);
 
@@ -78,5 +78,5 @@ public class BackgroundTaskDemo extends BackgroundTask {
         process = process.setScale(0, RoundingMode.DOWN);
         System.out.println("当前任务完成进度：%" + process.intValue());
     }
-    
+
 }

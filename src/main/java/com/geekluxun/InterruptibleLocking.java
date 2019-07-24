@@ -1,6 +1,7 @@
 package com.geekluxun;
 
-import java.util.concurrent.locks.*;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * InterruptibleLocking
@@ -11,7 +12,7 @@ public class InterruptibleLocking {
     private Lock lock = new ReentrantLock();
 
     public boolean sendOnSharedLine(String message)
-            throws InterruptedException {
+        throws InterruptedException {
         lock.lockInterruptibly();
         try {
             return cancellableSendOnSharedLine(message);

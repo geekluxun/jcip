@@ -12,7 +12,7 @@ import java.util.List;
  * @Other:
  */
 public class FutureRendererDemo extends FutureRenderer {
-    public static void main(String[] argc){
+    public static void main(String[] argc) {
         FutureRendererDemo demo = new FutureRendererDemo();
         demo.renderPage("luxun");
     }
@@ -25,7 +25,7 @@ public class FutureRendererDemo extends FutureRenderer {
     @Override
     List<ImageInfo> scanForImageInfo(CharSequence s) {
         List<ImageInfo> list = new ArrayList<>();
-        
+
         return list;
     }
 

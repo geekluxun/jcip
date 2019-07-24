@@ -1,6 +1,6 @@
 package com.geekluxun;
 
-import net.jcip.annotations.*;
+import net.jcip.annotations.ThreadSafe;
 
 /**
  * SafeLazyInitialization

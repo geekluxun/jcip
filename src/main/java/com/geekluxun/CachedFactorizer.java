@@ -1,9 +1,13 @@
 package com.geekluxun;
 
-import java.math.BigInteger;
-import javax.servlet.*;
+import net.jcip.annotations.GuardedBy;
+import net.jcip.annotations.ThreadSafe;
 
-import net.jcip.annotations.*;
+import javax.servlet.GenericServlet;
+import javax.servlet.Servlet;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import java.math.BigInteger;
 
 /**
  * CachedFactorizer
@@ -14,10 +18,14 @@ import net.jcip.annotations.*;
  */
 @ThreadSafe
 public class CachedFactorizer extends GenericServlet implements Servlet {
-    @GuardedBy("this") private BigInteger lastNumber;
-    @GuardedBy("this") private BigInteger[] lastFactors;
-    @GuardedBy("this") private long hits;
-    @GuardedBy("this") private long cacheHits;
+    @GuardedBy("this")
+    private BigInteger lastNumber;
+    @GuardedBy("this")
+    private BigInteger[] lastFactors;
+    @GuardedBy("this")
+    private long hits;
+    @GuardedBy("this")
+    private long cacheHits;
 
     public synchronized long getHits() {
         return hits;

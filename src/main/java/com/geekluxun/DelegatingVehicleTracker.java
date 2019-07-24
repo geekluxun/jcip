@@ -1,11 +1,13 @@
 package com.geekluxun;
 
-import java.util.*;
-import java.util.concurrent.*;
-import java.awt.*;
-import java.awt.Point;
+import net.jcip.annotations.ThreadSafe;
 
-import net.jcip.annotations.*;
+import java.awt.Point;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 /**
  * DelegatingVehicleTracker
@@ -40,7 +42,7 @@ public class DelegatingVehicleTracker {
     // Alternate version of getLocations (Listing 4.8)
     public Map<String, Point> getLocationsAsStatic() {
         return Collections.unmodifiableMap(
-                new HashMap<String, Point>(locations));
+            new HashMap<String, Point>(locations));
     }
 }
 

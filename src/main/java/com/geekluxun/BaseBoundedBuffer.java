@@ -1,6 +1,7 @@
 package com.geekluxun;
 
-import net.jcip.annotations.*;
+import net.jcip.annotations.GuardedBy;
+import net.jcip.annotations.ThreadSafe;
 
 /**
  * BaseBoundedBuffer
@@ -10,11 +11,15 @@ import net.jcip.annotations.*;
  * @author Brian Goetz and Tim Peierls
  */
 @ThreadSafe
-public abstract class BaseBoundedBuffer <V> {
-    @GuardedBy("this") private final V[] buf;
-    @GuardedBy("this") private int tail;
-    @GuardedBy("this") private int head;
-    @GuardedBy("this") private int count;
+public abstract class BaseBoundedBuffer<V> {
+    @GuardedBy("this")
+    private final V[] buf;
+    @GuardedBy("this")
+    private int tail;
+    @GuardedBy("this")
+    private int head;
+    @GuardedBy("this")
+    private int count;
 
     protected BaseBoundedBuffer(int capacity) {
         this.buf = (V[]) new Object[capacity];
