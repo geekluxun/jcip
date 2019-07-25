@@ -30,6 +30,7 @@ public class LifecycleWebServer {
                     }
                 });
             } catch (RejectedExecutionException e) {
+                // 关闭后再提交的任务，会被拒绝
                 if (!exec.isShutdown())
                     log("task submission rejected", e);
             }
@@ -37,6 +38,7 @@ public class LifecycleWebServer {
     }
 
     public void stop() {
+        /**停止接收新任务，同时等待已提交的任务完成（包括尚未开始的任务）*/
         exec.shutdown();
     }
 

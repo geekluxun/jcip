@@ -42,6 +42,12 @@ public class ProducerConsumer {
             }
         }
 
+        /**
+         * 递归
+         *
+         * @param root
+         * @throws InterruptedException
+         */
         private void crawl(File root) throws InterruptedException {
             File[] entries = root.listFiles(fileFilter);
             if (entries != null) {
@@ -81,6 +87,7 @@ public class ProducerConsumer {
     private static final int N_CONSUMERS = Runtime.getRuntime().availableProcessors();
 
     public static void startIndexing(File[] roots) {
+        // 生产者和消费者通过queue交互
         BlockingQueue<File> queue = new LinkedBlockingQueue<File>(BOUND);
         FileFilter filter = new FileFilter() {
             public boolean accept(File file) {
@@ -88,9 +95,11 @@ public class ProducerConsumer {
             }
         };
 
+        // 生产者
         for (File root : roots)
             new Thread(new FileCrawler(queue, filter, root)).start();
 
+        // 消费者
         for (int i = 0; i < N_CONSUMERS; i++)
             new Thread(new Indexer(queue)).start();
     }

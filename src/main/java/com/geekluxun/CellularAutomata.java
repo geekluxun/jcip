@@ -17,13 +17,17 @@ public class CellularAutomata {
 
     public CellularAutomata(Board board) {
         this.mainBoard = board;
+        // 获取CPU核数
         int count = Runtime.getRuntime().availableProcessors();
         this.barrier = new CyclicBarrier(count,
             new Runnable() {
+                // 所有线程到达关卡时候执行此任务
+                @Override
                 public void run() {
                     mainBoard.commitNewValues();
                 }
             });
+        // 把问题分成了和CPU核数一样多
         this.workers = new Worker[count];
         for (int i = 0; i < count; i++)
             workers[i] = new Worker(mainBoard.getSubBoard(count, i));

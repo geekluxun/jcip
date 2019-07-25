@@ -17,12 +17,18 @@ public class Preloader {
         return null;
     }
 
+    /**
+     * FutureTask是实现了Future接口和Runalbe接口,Future接口主要提供了和任务的各种"交互"能力
+     */
     private final FutureTask<ProductInfo> future =
         new FutureTask<ProductInfo>(new Callable<ProductInfo>() {
+            @Override
             public ProductInfo call() throws DataLoadException {
                 return loadProductInfo();
             }
         });
+    
+
     private final Thread thread = new Thread(future);
 
     public void start() {
@@ -34,6 +40,7 @@ public class Preloader {
         try {
             return future.get();
         } catch (ExecutionException e) {
+            // 如果是受检异常直接抛出
             Throwable cause = e.getCause();
             if (cause instanceof DataLoadException)
                 throw (DataLoadException) cause;

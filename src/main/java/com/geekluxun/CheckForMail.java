@@ -15,6 +15,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
  */
 public class CheckForMail {
     public boolean checkMail(Set<String> hosts, long timeout, TimeUnit unit) throws InterruptedException {
+        // 使用私有的ExecutorService,把它的寿命限制在一次方法调用中
         ExecutorService exec = Executors.newCachedThreadPool();
         final AtomicBoolean hasNewMail = new AtomicBoolean(false);
         try {

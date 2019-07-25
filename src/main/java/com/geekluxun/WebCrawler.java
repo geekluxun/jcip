@@ -51,6 +51,11 @@ public abstract class WebCrawler {
 
     protected abstract List<URL> processPage(URL url);
 
+    /**
+     * 关闭的时候保存那些还未执行的任务
+     *
+     * @param uncrawled
+     */
     private void saveUncrawled(List<Runnable> uncrawled) {
         for (Runnable task : uncrawled)
             urlsToCrawl.add(((CrawlTask) task).getPage());

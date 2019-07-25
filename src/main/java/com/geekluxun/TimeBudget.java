@@ -20,10 +20,10 @@ public class TimeBudget {
         for (TravelCompany company : companies)
             tasks.add(new QuoteTask(company, travelInfo));
 
+        // 执行所有任务
         List<Future<TravelQuote>> futures = exec.invokeAll(tasks, time, unit);
 
-        List<TravelQuote> quotes =
-            new ArrayList<TravelQuote>(tasks.size());
+        List<TravelQuote> quotes = new ArrayList<TravelQuote>(tasks.size());
         Iterator<QuoteTask> taskIter = tasks.iterator();
         for (Future<TravelQuote> f : futures) {
             QuoteTask task = taskIter.next();

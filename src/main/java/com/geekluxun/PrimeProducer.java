@@ -24,6 +24,7 @@ public class PrimeProducer extends Thread {
                 queue.put(p = p.nextProbablePrime());
         } catch (InterruptedException consumed) {
             /* Allow thread to exit */
+            // 外部可以中断当前线程，线程检测到中断标志位时候，会抛出此异常，然后退出此线程
         }
     }
 

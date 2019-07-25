@@ -49,6 +49,9 @@ public class LogService {
         queue.put(msg);
     }
 
+    /**
+     * 这里使用reservations保证在退出时队列中的所有日志都打印到文件中
+     */
     private class LoggerThread extends Thread {
         public void run() {
             try {

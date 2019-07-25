@@ -35,17 +35,23 @@ public class IndexingService {
         return false;
     }
 
+    /**
+     * 生产者
+     */
     class CrawlerThread extends Thread {
         public void run() {
             try {
                 crawl(root);
             } catch (InterruptedException e) { /* fall through */
+                // 如果收到中断请求，执行finally,放致命药丸
             } finally {
                 while (true) {
                     try {
+                        // 收到中断请求后先消息队列中放入致命药丸
                         queue.put(POISON);
                         break;
                     } catch (InterruptedException e1) { /* retry */
+                        // 重试，直到放入致命药丸成功
                     }
                 }
             }
@@ -69,6 +75,7 @@ public class IndexingService {
             try {
                 while (true) {
                     File file = queue.take();
+                    // 收到致命药丸，停止
                     if (file == POISON)
                         break;
                     else
@@ -90,6 +97,9 @@ public class IndexingService {
         consumer.start();
     }
 
+    /**
+     * 向生产者发送中断请求
+     */
     public void stop() {
         producer.interrupt();
     }

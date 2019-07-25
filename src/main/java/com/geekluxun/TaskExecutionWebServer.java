@@ -15,8 +15,7 @@ import java.util.concurrent.Executors;
  */
 public class TaskExecutionWebServer {
     private static final int NTHREADS = 100;
-    private static final Executor exec
-        = Executors.newFixedThreadPool(NTHREADS);
+    private static final Executor exec = Executors.newFixedThreadPool(NTHREADS);
 
     public static void main(String[] args) throws IOException {
         ServerSocket socket = new ServerSocket(80);

@@ -4,7 +4,9 @@ import net.jcip.annotations.ThreadSafe;
 
 import java.util.Collections;
 import java.util.Map;
+import java.util.PriorityQueue;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.PriorityBlockingQueue;
 
 /**
  * PublishingVehicleTracker

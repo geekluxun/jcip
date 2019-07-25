@@ -14,8 +14,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class TrackingExecutor extends AbstractExecutorService {
     private final ExecutorService exec;
-    private final Set<Runnable> tasksCancelledAtShutdown =
-        Collections.synchronizedSet(new HashSet<Runnable>());
+    private final Set<Runnable> tasksCancelledAtShutdown = Collections.synchronizedSet(new HashSet<Runnable>());
 
     public TrackingExecutor(ExecutorService exec) {
         this.exec = exec;
@@ -54,8 +53,8 @@ public class TrackingExecutor extends AbstractExecutorService {
                 try {
                     runnable.run();
                 } finally {
-                    if (isShutdown()
-                        && Thread.currentThread().isInterrupted())
+                    // 任务已经开始， 但没有结束的任务也要放到集合中等恢复后重新执行任务
+                    if (isShutdown() && Thread.currentThread().isInterrupted())
                         tasksCancelledAtShutdown.add(runnable);
                 }
             }

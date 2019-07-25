@@ -21,6 +21,13 @@ public class Memoizer2<A, V> implements Computable<A, V> {
         this.c = c;
     }
 
+    /**
+     * 如果计算是一个很耗时的操作，会可能导致两个线程重复计算一个任务的问题
+     *
+     * @param arg
+     * @return
+     * @throws InterruptedException
+     */
     @Override
     public V compute(A arg) throws InterruptedException {
         V result = cache.get(arg);

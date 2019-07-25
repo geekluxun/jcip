@@ -6,6 +6,7 @@ import java.util.concurrent.*;
  * Memoizer
  * <p/>
  * Final implementation of Memoizer
+ * 这是一个很好的缓存计算结果的方案
  *
  * @author Brian Goetz and Tim Peierls
  */

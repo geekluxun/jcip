@@ -21,6 +21,7 @@ class BrokenPrimeProducer extends Thread {
     public void run() {
         try {
             BigInteger p = BigInteger.ONE;
+            // 因为阻塞队列在队列满的时候导致线程被阻塞，及时外部给当前线程发送cancelled信号，也不会执行
             while (!cancelled)
                 queue.put(p = p.nextProbablePrime());
         } catch (InterruptedException consumed) {
