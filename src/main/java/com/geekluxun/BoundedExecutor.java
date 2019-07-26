@@ -24,6 +24,7 @@ public class BoundedExecutor {
     }
 
     public void submitTask(final Runnable command) throws InterruptedException {
+        /**通过信号量，限制任务的提交**/
         semaphore.acquire();
         try {
             exec.execute(new Runnable() {

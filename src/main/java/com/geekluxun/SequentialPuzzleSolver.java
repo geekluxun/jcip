@@ -14,6 +14,7 @@ import java.util.Set;
 
 public class SequentialPuzzleSolver<P, M> {
     private final Puzzle<P, M> puzzle;
+    // 已经搜索到的位置
     private final Set<P> seen = new HashSet<P>();
 
     public SequentialPuzzleSolver(Puzzle<P, M> puzzle) {
@@ -25,6 +26,11 @@ public class SequentialPuzzleSolver<P, M> {
         return search(new PuzzleNode<P, M>(pos, null, null));
     }
 
+    /**
+     * 使用深度优先搜索
+     * @param node
+     * @return
+     */
     private List<M> search(PuzzleNode<P, M> node) {
         if (!seen.contains(node.pos)) {
             seen.add(node.pos);

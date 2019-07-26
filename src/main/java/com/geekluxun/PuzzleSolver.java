@@ -6,7 +6,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * PuzzleSolver
  * <p/>
  * Solver that recognizes when no solution exists
- *
+ * 能够感知任务不存在解决方案
  * @author Brian Goetz and Tim Peierls
  */
 public class PuzzleSolver<P, M> extends ConcurrentPuzzleSolver<P, M> {

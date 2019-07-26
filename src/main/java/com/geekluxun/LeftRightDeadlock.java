@@ -11,6 +11,9 @@ public class LeftRightDeadlock {
     private final Object left = new Object();
     private final Object right = new Object();
 
+    /**
+     * 产生死锁
+     */
     public void leftRight() {
         synchronized (left) {
             synchronized (right) {

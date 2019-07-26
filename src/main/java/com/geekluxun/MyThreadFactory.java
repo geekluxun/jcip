@@ -10,6 +10,7 @@ import java.util.concurrent.ThreadFactory;
  * @author Brian Goetz and Tim Peierls
  */
 public class MyThreadFactory implements ThreadFactory {
+    // 定制化线程池名，可以方便区别线程来自哪个池
     private final String poolName;
 
     public MyThreadFactory(String poolName) {

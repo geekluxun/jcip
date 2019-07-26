@@ -7,6 +7,7 @@ import net.jcip.annotations.ThreadSafe;
  * SimulatedCAS
  * <p/>
  * Simulated CAS operation
+ * 模拟比较再交换
  *
  * @author Brian Goetz and Tim Peierls
  */
@@ -20,16 +21,14 @@ public class SimulatedCAS {
         return value;
     }
 
-    public synchronized int compareAndSwap(int expectedValue,
-                                           int newValue) {
+    public synchronized int compareAndSwap(int expectedValue, int newValue) {
         int oldValue = value;
         if (oldValue == expectedValue)
             value = newValue;
         return oldValue;
     }
 
-    public synchronized boolean compareAndSet(int expectedValue,
-                                              int newValue) {
+    public synchronized boolean compareAndSet(int expectedValue, int newValue) {
         return (expectedValue
             == compareAndSwap(expectedValue, newValue));
     }

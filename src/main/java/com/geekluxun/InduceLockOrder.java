@@ -24,6 +24,9 @@ public class InduceLockOrder {
                 }
             }
         }
+        /**
+         * 指定锁的顺序避免死锁
+         */
         int fromHash = System.identityHashCode(fromAcct);
         int toHash = System.identityHashCode(toAcct);
 

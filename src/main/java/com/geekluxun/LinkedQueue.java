@@ -8,7 +8,7 @@ import java.util.concurrent.atomic.AtomicReference;
  * LinkedQueue
  * <p/>
  * Insertion in the Michael-Scott nonblocking queue algorithm
- *
+ * 非阻塞算法实现的链式队列
  * @author Brian Goetz and Tim Peierls
  */
 @ThreadSafe
@@ -25,10 +25,8 @@ public class LinkedQueue<E> {
     }
 
     private final Node<E> dummy = new Node<E>(null, null);
-    private final AtomicReference<Node<E>> head
-        = new AtomicReference<Node<E>>(dummy);
-    private final AtomicReference<Node<E>> tail
-        = new AtomicReference<Node<E>>(dummy);
+    private final AtomicReference<Node<E>> head = new AtomicReference<Node<E>>(dummy);
+    private final AtomicReference<Node<E>> tail = new AtomicReference<Node<E>>(dummy);
 
     public boolean put(E item) {
         Node<E> newNode = new Node<E>(item, null);

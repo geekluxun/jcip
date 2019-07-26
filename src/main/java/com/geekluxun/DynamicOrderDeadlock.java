@@ -14,6 +14,9 @@ public class DynamicOrderDeadlock {
     public static void transferMoney(Account fromAccount,
                                      Account toAccount,
                                      DollarAmount amount) throws InsufficientFundsException {
+        /**
+         * 动态加锁顺序不一致导致的死锁（两把锁依赖两个参数提供）
+         */
         synchronized (fromAccount) {
             synchronized (toAccount) {
                 if (fromAccount.getBalance().compareTo(amount) < 0)

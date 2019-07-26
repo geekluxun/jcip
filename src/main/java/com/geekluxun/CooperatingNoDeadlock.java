@@ -30,6 +30,9 @@ class CooperatingNoDeadlock {
 
         public synchronized void setLocation(Point location) {
             boolean reachedDestination;
+            /**
+             * 只同步了共享资源部分，而不是整个方法，避免了死锁 （对比CooperatingDeadlock.class）
+             */
             synchronized (this) {
                 this.location = location;
                 reachedDestination = location.equals(destination);

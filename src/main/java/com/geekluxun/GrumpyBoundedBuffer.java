@@ -19,6 +19,11 @@ public class GrumpyBoundedBuffer<V> extends BaseBoundedBuffer<V> {
         super(size);
     }
 
+    /**
+     * 这里通过抛出受检异常让调用者处理先验条件失败
+     * @param v
+     * @throws BufferFullException
+     */
     public synchronized void put(V v) throws BufferFullException {
         if (isFull())
             throw new BufferFullException();
@@ -43,6 +48,7 @@ class ExampleUsage {
                 // use item
                 break;
             } catch (BufferEmptyException e) {
+                // 重试逻辑
                 Thread.sleep(SLEEP_GRANULARITY);
             }
         }
